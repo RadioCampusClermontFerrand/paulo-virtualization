@@ -10,7 +10,16 @@ export QEMU_AUDIO_DAC_VOICES=2
 # tap qemu
 # version smp
 ROOT_DIR=/home/paulo/xen
-kvm -smp 4 -initrd $ROOT_DIR/initrd-2.4.7-10smp.img -kernel $ROOT_DIR/vmlinuz-2.4.7-10smp -hda $ROOT_DIR/paulo -append "root=/dev/hda1" -m 1024 -net nic,model=ne2k_pci,vlan=0,macaddr=00:13:D3:14:F5:55 -net tap,vlan=0,ifname=tap0  -soundhw es1370 -cdrom /dev/cdrom  -full-screen  &
+kvm -smp 4 \
+    -m 1024 \
+    -net nic,model=ne2k_pci,vlan=0,macaddr=00:13:D3:14:F5:55 -net tap,vlan=0,ifname=tap0 \
+    -soundhw es1370 \
+    -cdrom /dev/cdrom \
+    -full-screen \
+    -append "root=/dev/hda1" \
+    -initrd $ROOT_DIR/initrd-2.4.7-10smp.img -kernel $ROOT_DIR/vmlinuz-2.4.7-10smp -hda $ROOT_DIR/paulo &
+
+
 # ok
 #kvm -smp 4 -initrd $ROOT_DIR/initrd-2.4.7-10.img -kernel $ROOT_DIR/vmlinuz-2.4.7-10 -hda $ROOT_DIR/paulo -append "root=/dev/hda1" -m 1024 -net nic,model=ne2k_pci,vlan=0,macaddr=00:13:D3:14:F5:55 -net tap,vlan=0,ifname=tap0  -soundhw es1370 -cdrom /dev/cdrom  -full-screen  &
 #kvm -smp 4 -initrd $ROOT_DIR/initrd-2.4.7-10.img -kernel $ROOT_DIR/vmlinuz-2.4.7-10 -hda $ROOT_DIR/paulo -append "root=/dev/hda1" -m 1024 -net nic,model=ne2k_pci,vlan=0,macaddr=00:13:D3:14:F5:55  -net tap,vlan=0,ifname=tap0  -soundhw es1370 -device lsi -drive if=none,file=/dev/sr0,id=sr0 -device scsi-block,drive=sr0 &
